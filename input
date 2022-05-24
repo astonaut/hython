@@ -1,0 +1,9 @@
+{
+    def a = 2, b = 4, c;
+    c = a * b;
+    {
+        def a = 6;
+        print a * b;
+    }
+    print a * b;
+}
