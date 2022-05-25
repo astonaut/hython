@@ -17,13 +17,14 @@ public:
     ExprTreeEvaluator(ExprTreeEvaluator *next) {
         this->next = next;
     }
-    int find(string var) {
+    int &find(string var) {
         if (this->memory.find(var) != this->memory.end()) {
             return this->memory[var];
         }
 
         if (this->next) return this->next->find(var);
-        return 0;
+        cout << "error : undefind " << var << endl;
+        exit(1);
     }
     int run(pANTLR3_BASE_TREE);
 };
@@ -121,8 +122,9 @@ int ExprTreeEvaluator::run(pANTLR3_BASE_TREE tree)
             return run(getChild(tree,0)) / run(getChild(tree,1));
         case ASSIGN: {
             string var(getText(getChild(tree,0)));
+            int &var_ins = this->find(var);
             int val = run(getChild(tree,1));
-            memory[var] = val;
+            var_ins = val;
             return val;
         }
         default:
