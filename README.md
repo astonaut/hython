@@ -1,2 +1,2 @@
-# lython
-自制类python语言lython
+# hython
+自制类python语言hython
